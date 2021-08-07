@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # GEE API private key
-ee-queirozws-c6f64cc1e178.json
+privatekey.json
 
 # thumbnails directory
 thumbnails
