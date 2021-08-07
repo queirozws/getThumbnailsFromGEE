@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # GEE API private key
-privatekey.json
+.privatekey.json
 
 # thumbnails directory
 thumbnails
