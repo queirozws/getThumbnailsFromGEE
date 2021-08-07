@@ -67,7 +67,7 @@ function script () {
 
         let filename = id.split('/').slice(-1)[0];
 
-        // geePrint(thumbURL, ee.String);
+        print(thumbURL, ee.String);
 
         console.log(`Downloading: ${filename}\n`);
 
