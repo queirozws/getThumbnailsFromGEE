@@ -16,4 +16,4 @@ function runAnalysis () {
 // Authenticate using a service account.
 ee.data.authenticateViaPrivateKey(privateKey, runAnalysis, function(e) {
     console.error('Authentication error: ' + e);
-}); 
+});

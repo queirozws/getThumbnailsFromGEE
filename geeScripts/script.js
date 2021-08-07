@@ -15,13 +15,17 @@ async function download(url, filename, format) {
 
 function script () {
 
-    let palettes = [
-        '#ffff00',  '#fff800',  '#fff000',  '#ffe900',  '#ffe200',  '#ffdb00',
-        '#ffd300',  '#ffcc00',  '#ffc500',  '#ffbd00',  '#ffb600',  '#ffaf00',
-        '#ffa800',  '#ffa000',  '#ff9900',  '#ff9200',  '#ff8a00',  '#ff8300',
-        '#ff7c00',  '#ff7500',  '#ff6d00',  '#ff6600',  '#ff5f00',  '#ff5700',
-        '#ff5000',  '#ff4900',  '#ff4200',  '#ff3a00',  '#ff3300',  '#ff2c00',
-        '#ff2400',  '#ff1d00',  '#ff1600',  '#ff0f00',  '#ff0700',  '#ff0000'
+    var paletteModis = [
+        'aec3d4', // water
+        '152106', '225129', '369b47', '30eb5b', '387242', // forest
+        '6a2325', 'c3aa69', 'b76031', 'd9903d', '91af40', // shrub, grass, savannah
+        '111149', // wetlands
+        'cdb33b', // croplands
+        'cc0013', // urban
+        '33280d', // crop mosaic
+        'd7cdcc', // snow and ice
+        'f7e084', // barren
+        '6f6f6f'  // tundra
     ];
     
     let geometry = ee.Geometry.Polygon([[
@@ -33,15 +37,15 @@ function script () {
     
     let visParams = {
         version: null,
-        bands: 'fire_frequency_1985_2020',
+        bands: ['Land_Cover_Type_1'],
         min: 0,
-        max: 36,
+        max: 17,
         gain: null,
         bias: null,
         gamma: null,
-        palette: palettes,
+        palette: paletteModis,
         opacity: null,
-        format: 'jpg', // or "jpg"
+        format: 'png', // or "jpg"
 
         // Thumbnails vis params
         dimensions: 420,
@@ -49,14 +53,16 @@ function script () {
     };
     
     idList = [
+        'MODIS/051/MCD12Q1/2001_01_01',
         // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-accumulated-burned-area-1',
         // 'projects/nexgenmap/mapbiomas2/landsat/mosaics',
         // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-annual-burned-area-1',
         // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-annual-burned-coverage-1',
-        'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-fire-frequency-1'
+        // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-fire-frequency-1'
     ];
 
     idList.map(function (id) {
+        
         let thumbURL = ee.Image(id).getThumbURL( visParams ); // {ee.String}
 
         let filename = id.split('/').slice(-1)[0];
