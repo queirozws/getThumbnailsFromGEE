@@ -5,7 +5,7 @@
  * @param {*} geeObjType 
  */
 
-function geePrint (obj, geeObjType) {
+function print (obj, geeObjType) {
     
     geeObjType(obj).evaluate( (success, failure) => {
         
@@ -19,4 +19,4 @@ function geePrint (obj, geeObjType) {
 
 }
 
-module.exports = geePrint
+module.exports = print

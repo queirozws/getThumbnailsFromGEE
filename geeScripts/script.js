@@ -2,7 +2,7 @@ const ee = require('@google/earthengine');
 const fs = require('fs');
 const fetch = require('node-fetch');
 
-const geePrint = require('/home/wsq/mapbiomas/auxiliar/print.js'); // Por que funciona apenas com full path
+const print = require('/home/wsq/mapbiomas/auxiliar/print.js'); // Por que funciona apenas com full path?
 
 async function download(url, filename, format) {
     const response = await fetch(url);
