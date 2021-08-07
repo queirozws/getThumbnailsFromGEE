@@ -1,6 +1,6 @@
 // Require client library and private key.
 const ee = require('@google/earthengine');
-const privateKey = require('./ee-queirozws-c6f64cc1e178.json');
+const privateKey = require('./privatekey.json');
 
 const geeScript = require('./geeScripts/script3.js');
 
