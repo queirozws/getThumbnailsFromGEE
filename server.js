@@ -8,7 +8,7 @@ function initializationError (e) {
     console.error('Initialization error: ' + e);
 }
 
-// Initialize client library and run analysis.
+// Initialize client library and run analysis
 function runAnalysis () {
     ee.initialize(null, null, geeScript, initializationError);
 };
@@ -16,4 +16,4 @@ function runAnalysis () {
 // Authenticate using a service account.
 ee.data.authenticateViaPrivateKey(privateKey, runAnalysis, function(e) {
     console.error('Authentication error: ' + e);
-});
+}); 
