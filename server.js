@@ -2,7 +2,7 @@
 const ee = require('@google/earthengine');
 const privateKey = require('./privatekey.json');
 
-const geeScript = require('./geeScripts/script3.js');
+const geeScript = require('./geeScripts/script.js');
 
 function initializationError (e) {
     console.error('Initialization error: ' + e);
