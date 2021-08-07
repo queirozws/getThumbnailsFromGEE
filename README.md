@@ -1,1 +1,1 @@
-teste
+Projeto destinado a realizar o download das imagens (thumbnails) a partir das URLs geradas pelo Google Earth Engine.
