@@ -52,7 +52,9 @@ function script () {
         region: geometry
     };
     
-    idList = [
+    let idList = [
+        'MODIS/051/MCD12Q1/2001_01_01',
+        'MODIS/051/MCD12Q1/2001_01_01',
         'MODIS/051/MCD12Q1/2001_01_01',
         // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-accumulated-burned-area-1',
         // 'projects/nexgenmap/mapbiomas2/landsat/mosaics',
@@ -61,19 +63,17 @@ function script () {
         // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-fire-frequency-1'
     ];
 
-    idList.map(function (id) {
+    let urlList = idList.map(function (id) {
         
         let thumbURL = ee.Image(id).getThumbURL( visParams ); // {ee.String}
 
         let filename = id.split('/').slice(-1)[0];
 
-        print(thumbURL, ee.String);
-
-        console.log(`Downloading: ${filename}\n`);
-
         download(thumbURL, filename, visParams.format);
 
-        return null
+        print(thumbURL, ee.String);
+
+        return thumbURL
 
     });
 
