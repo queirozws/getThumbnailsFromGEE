@@ -1,6 +1,10 @@
 // Require client library and private key.
 const ee = require('@google/earthengine');
+// const dot = require('dotenv').config({ path: '.env' });
+// const privateKey = process.env.PRIVATEKEY;
 const privateKey = require('./privatekey.json');
+
+// console.log(privateKey);
 
 const geeScript = require('./geeScripts/script.js');
 
