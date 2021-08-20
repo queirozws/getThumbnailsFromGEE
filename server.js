@@ -2,11 +2,12 @@
 const ee = require('@google/earthengine');
 // const dot = require('dotenv').config({ path: '.env' });
 // const privateKey = process.env.PRIVATEKEY;
+// const upload = require('./upload');
 const privateKey = require('./privatekey.json');
 
 // console.log(privateKey);
 
-const geeScript = require('./geeScripts/script.js');
+const geeScript = require('./geeScripts/geeScript');
 
 function initializationError (e) {
     console.error('Initialization error: ' + e);
@@ -18,6 +19,8 @@ function runAnalysis () {
 };
 
 // Authenticate using a service account.
-ee.data.authenticateViaPrivateKey(privateKey, runAnalysis, function(e) {
+ee.data.authenticateViaPrivateKey(privateKey, runAnalysis, e => {
     console.error('Authentication error: ' + e);
 });
+
+// upload(auth).catch(console.error);

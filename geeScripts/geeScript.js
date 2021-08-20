@@ -1,19 +1,8 @@
 const ee = require('@google/earthengine');
-const fs = require('fs');
-const fetch = require('node-fetch');
 
-const print = require('/home/wsq/mapbiomas/js/get-thumbnails-from-gee/auxiliar/print.js'); // Por que funciona apenas com full path?
-
-async function download(url, filename, format) {
-    const response = await fetch(url);
-
-    // print
-    
-    const buffer = await response.buffer();
-
-    fs.writeFile (`./thumbnails/${filename}.${format}`, buffer, () => console.log('Finished downloading!') );
-
-}
+const download = require('../auxiliar/download');
+// const upload = require('../auxiliar/upload');
+const print = require('../auxiliar/print');
 
 function script () {
 
@@ -39,13 +28,13 @@ function script () {
     
     let visParams = {
         version: null,
-        bands: ['Land_Cover_Type_1'],
+        // bands: ['Land_Cover_Type_1'],
         min: 0,
         max: 17,
         gain: null,
         bias: null,
         gamma: null,
-        palette: paletteModis,
+        // palette: paletteModis,
         opacity: null,
         format: 'png', // or "jpg"
 
@@ -56,22 +45,24 @@ function script () {
     
     let idList = [
         'MODIS/051/MCD12Q1/2001_01_01',
-        'MODIS/051/MCD12Q1/2001_01_01',
-        'MODIS/051/MCD12Q1/2001_01_01',
-        // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-accumulated-burned-area-1',
+        // 'MODIS/051/MCD12Q1/2001_01_01',
+        // 'MODIS/051/MCD12Q1/2001_01_01',
+        'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-accumulated-burned-area-1',
         // 'projects/nexgenmap/mapbiomas2/landsat/mosaics',
-        // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-annual-burned-area-1',
-        // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-annual-burned-coverage-1',
-        // 'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-fire-frequency-1'
+        'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-annual-burned-area-1',
+        'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-annual-burned-coverage-1',
+        'users/queirozws/MAPBIOMAS-FIRE/COLLECTION1/mapbiomas-fire-collection1-fire-frequency-1'
     ];
 
     let urlList = idList.map(function (id) {
         
-        let thumbURL = ee.Image(id).getThumbURL( visParams ); // {ee.String}
+        let thumbURL = ee.Image(id).select(0).getThumbURL( visParams ); // {ee.String}
 
         let filename = id.split('/').slice(-1)[0];
 
         download(thumbURL, filename, visParams.format);
+
+        // upload(auth, filename).catch(console.error);
 
         print(thumbURL, ee.String);
 
